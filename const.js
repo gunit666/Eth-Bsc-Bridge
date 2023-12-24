@@ -1,8 +1,8 @@
-const { decrypt } = require('./scripts/decrypt-key')
-const fs = require("fs");
+import { decrypt } from './scripts/decrypt-key';
+import { readFileSync } from "fs";
 
-const bscRaw = fs.readFileSync('bsc_account.json');
-const ethRaw = fs.readFileSync('eth_account.json');
+const bscRaw = readFileSync('bsc_account.json');
+const ethRaw = readFileSync('eth_account.json');
 
 const bscAccountDetails = JSON.parse(bscRaw)
 const ethAccountDetails = JSON.parse(ethRaw)
@@ -11,9 +11,9 @@ const MNEMONIC = 'company shine first craft flash upon exact combine off gain ar
 const NETWORK = {
     ETH_RINKEBY_WSS: 'wss://rinkeby.infura.io/ws/v3/5583a1ce54604375b02d6246936d9d53',
     ETH_RINKEBY_HTTPS: 'https://rinkeby.infura.io/v3/5583a1ce54604375b02d6246936d9d53',
-    BSC_MAINNET: `https://bsc-dataseed1.binance.org`, // changfe network to 56
-    BSC_TESTNET: 'https://data-seed-prebsc-1-s1.binance.org:8545', // changfe network to 97
-    // BSC_TESTNET: 'https://speedy-nodes-nyc.moralis.io/7ffce73e1006cbb3dbfcbef6/bsc/testnet', // changfe network to 97
+    BSC_MAINNET: `https://bsc-dataseed1.binance.org`, // change network to 56
+    BSC_TESTNET: 'https://data-seed-prebsc-1-s1.binance.org:8545', // change network to 97
+    // BSC_TESTNET: 'https://speedy-nodes-nyc.moralis.io/7ffce73e1006cbb3dbfcbef6/bsc/testnet', // change network to 97
     BSC_TESTNET_WSS: 'wss://speedy-nodes-nyc.moralis.io/7ffce73e1006cbb3dbfcbef6/bsc/testnet/ws'
 }
 
@@ -32,7 +32,7 @@ const BSC_RECEIVER = {
     privateKey: decrypt(bscAccountDetails.encryptedPk, bscAccountDetails.passphrase),
 }
 
-module.exports = {
+export default {
     MNEMONIC,
     NETWORK,
     CONTRACT_ADMIN,
